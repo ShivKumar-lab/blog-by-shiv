@@ -33,10 +33,10 @@
         <table>
             <thead>
                 <tr>
-                    <th><a th:href="@{'/posts/'+ ${currentPage} + '?sortField=title&sortDir=' +${reverseSortDir}}">Title</a></th>
-                    <th><a th:href="@{'/posts/'+ ${currentPage} + '?sortField=excerpt&sortDir=' +${reverseSortDir}}">Excerpt</a></th>
-                    <th><a th:href="@{'/posts/'+ ${currentPage} + '?sortField=publishedAt&sortDir=' +${reverseSortDir}}">Published At</a></th>
-                    <th><a th:href="@{'/posts/'+ ${currentPage} + '?sortField=author&sortDir=' +${reverseSortDir}}">Author</a></th>
+                    <th><a th:href="@{'/'+ ${currentPage} + '?sortField=title&sortDir=' +${reverseSortDir}}">Title</a></th>
+                    <th><a th:href="@{'/'+ ${currentPage} + '?sortField=excerpt&sortDir=' +${reverseSortDir}}">Excerpt</a></th>
+                    <th><a th:href="@{'/'+ ${currentPage} + '?sortField=publishedAt&sortDir=' +${reverseSortDir}}">Published At</a></th>
+                    <th><a th:href="@{'/'+ ${currentPage} + '?sortField=author&sortDir=' +${reverseSortDir}}">Author</a></th>
                 </tr>
             </thead>
             <tbody>
@@ -53,9 +53,9 @@
             Total posts : [[${totalPosts}]]
             Total Pages : [[${totalPages}]]
             Current Page : [[${currentPage}]]
-        <a th:if = "${currentPage < totalPages}" th:href="@{'/posts/'+ ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+        <a th:if = "${currentPage < totalPages}" th:href="@{'/'+ ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
         <span th:unless = "${currentPage < totalPages}">Next</span>
-        <a th:if = "${currentPage > 1}" th:href = "@{'/posts/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
+        <a th:if = "${currentPage > 1}" th:href = "@{'/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
         <span th:unless = "${currentPage > 1}">Previous</span>
 
     </div>
