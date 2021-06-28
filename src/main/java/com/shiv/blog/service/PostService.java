@@ -3,6 +3,8 @@ package com.shiv.blog.service;
 import com.shiv.blog.entity.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -18,4 +20,6 @@ public interface PostService {
     List<Post> getPosts(String searchString);
 
     List<Post> getAllPosts();
+
+    List<Post> getPostsOfAuthor(Long id);
 }

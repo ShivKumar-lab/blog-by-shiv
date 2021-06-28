@@ -19,4 +19,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query(value = "SELECT * FROM posts p Where p.author=:filterQuery", nativeQuery = true)
     List<Post> getPostByAuthor(@Param("filterQuery") String filterQuery);
+
+    @Query(value = "SELECT * FROM posts p Where p.user_id=:id", nativeQuery = true)
+    List<Post> getByUserId(@Param("id") Long id);
 }

@@ -2,6 +2,8 @@ package com.shiv.blog.controller;
 
 import com.shiv.blog.entity.Comment;
 import com.shiv.blog.entity.Post;
+import com.shiv.blog.model.AuthorFilterOptions;
+import com.shiv.blog.model.FilterOptions;
 import com.shiv.blog.model.TagFilterOptions;
 import com.shiv.blog.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -201,25 +203,31 @@ public class PostController {
     @GetMapping("/filterPost")
     public String applyFilters(Model model) {
         List<Tag> tags = tagService.getAllTags();
+        List<User> users = userService.getAllUsers();
         List<Tag> selectableTags = new ArrayList<>();
         for (Tag tag : tags) {
             if (!tag.getName().trim().isEmpty()) {
                 selectableTags.add(tag);
             }
         }
-        model.addAttribute("tagFilterOptions", new TagFilterOptions());
+        model.addAttribute("users",users);
+        model.addAttribute("filterOptions",new FilterOptions());
         model.addAttribute("selectableTags", selectableTags);
         return "apply_filters.html";
     }
 
     @PostMapping("/filterPost")
-    public String processFilters(@ModelAttribute TagFilterOptions tagFilterOptions, Model model, String dateFrom,
-                                 String dateTo) {
+    public String processFilters(@ModelAttribute FilterOptions filterOptions,
+                                 Model model, String dateFrom, String dateTo) {
         List<Post> posts = new ArrayList<>();
         List<Post> finalPosts = new ArrayList<>();
         List<Post> tempPostList = new ArrayList<>();
-        for (Tag tag : tagFilterOptions.getOptions()) {
+        for (Tag tag : filterOptions.getTagOptions()) {
             tempPostList.addAll(tagService.getSearchedPosts(tag.getName()));
+        }
+        //System.out.println(filterOptions.getUserOptions());
+        for(User user : filterOptions.getUserOptions()) {
+            tempPostList.addAll(postService.getPostsOfAuthor(user.getId()));
         }
         dateFrom += ":00.000Z";
         dateTo += ":00.000Z";

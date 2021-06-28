@@ -4,6 +4,13 @@
     <title>Update Post</title>
 </head>
 <body>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" th:href="@{/}">BlogApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02"
+            aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
 <div align="center">
     <h2>Update the Post</h2>
     <form th:action="@{/updatePost/{id} (id = ${post.id})}" th:object="${post}" method="post">
@@ -13,13 +20,13 @@
         <input type="hidden" th:field="*{createdAt}">
         <input type="hidden" th:field="*{author}">
         <div>
-            <input type="text" th:field="*{title}" required="required">
+            <input type="text" th:field="*{title}" required="required" class="form-control">
         </div>
         <div>
-            <input type="text" th:field="*{content}" required="required">
+            <input type="text" th:field="*{content}" required="required" class="form-control">
         </div>
         <div>
-            <input type="text" th:value="${bundledTags}" name="bundledTags">
+            <input type="text" th:value="${bundledTags}" name="bundledTags" class="form-control">
         </div>
         <div>
             <input type="submit" value="Update Post">

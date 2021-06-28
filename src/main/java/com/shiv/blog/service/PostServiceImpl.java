@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -64,5 +65,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getAllPosts() {
         return this.postRepository.findAll();
+    }
+
+    @Override
+    public List<Post> getPostsOfAuthor(Long id) {
+        return this.postRepository.getByUserId(id);
     }
 }
