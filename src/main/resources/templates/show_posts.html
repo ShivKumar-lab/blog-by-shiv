@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Posts</title>
+</head>
+<body>
+    <div align="center">
+        <h2>Posts</h2>
+
+
+
+        <form th:action="@{/searchPost}">
+            <div>
+                <input type="text" name="searchString" placeholder="Search(case-sensitive)...." required="required">
+                <input type="submit" value="Search">
+            </div>
+        </form>
+
+        <div th:if="${currentUser} == null" align="right">
+            <div><a th:href="@{/signup}">Create Account</a></div>
+            <div><a th:href="@{/login}">Log In</a></div>
+        </div>
+        <div th:unless="${currentUser} == null" align="right">
+            <div><a th:href="@{/logout}">Log Out</a></div>
+        </div>
+
+        <div align="right">
+            <a th:href="@{/filterPost}">Apply Filters</a>
+        </div>
+        <div th:unless="${currentUser == null}">
+            <a th:href="@{/addPost}">Add Post</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th><a th:href="@{'/posts/'+ ${currentPage} + '?sortField=title&sortDir=' +${reverseSortDir}}">Title</a></th>
+                    <th><a th:href="@{'/posts/'+ ${currentPage} + '?sortField=excerpt&sortDir=' +${reverseSortDir}}">Excerpt</a></th>
+                    <th><a th:href="@{'/posts/'+ ${currentPage} + '?sortField=publishedAt&sortDir=' +${reverseSortDir}}">Published At</a></th>
+                    <th><a th:href="@{'/posts/'+ ${currentPage} + '?sortField=author&sortDir=' +${reverseSortDir}}">Author</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="post : ${postList}">
+                    <td><a th:text="${post.title}" th:href="@{'/blogPost/'+ ${post.id}}"></a></td>
+                    <td th:text="${post.excerpt}"></td>
+                    <td th:text="${post.publishedAt}"}></td>
+                    <td th:text="${post.author}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div align="center">
+            Total posts : [[${totalPosts}]]
+            Total Pages : [[${totalPages}]]
+            Current Page : [[${currentPage}]]
+        <a th:if = "${currentPage < totalPages}" th:href="@{'/posts/'+ ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+        <span th:unless = "${currentPage < totalPages}">Next</span>
+        <a th:if = "${currentPage > 1}" th:href = "@{'/posts/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
+        <span th:unless = "${currentPage > 1}">Previous</span>
+
+    </div>
+</body>
+</html>
