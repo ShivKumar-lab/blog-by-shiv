@@ -68,12 +68,12 @@ public class RestApiController {
         return "Comment added";
     }
 
-    @PostMapping("/api/users")
+    @GetMapping("/api/users")
     public List<User> getUsers() {
         return this.userService.getAllUsers();
     }
 
-    @PostMapping("api/user/{id}")
+    @GetMapping("api/user/{id}")
     public User getUser(@PathVariable Long id) {
         return this.userService.getUser(id);
     }
