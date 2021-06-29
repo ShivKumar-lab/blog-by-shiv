@@ -77,4 +77,9 @@ public class RestApiController {
     public User getUser(@PathVariable Long id) {
         return this.userService.getUser(id);
     }
+
+    @PostMapping("api/user")
+    public void addUser(@RequestBody User user) {
+        this.userService.addUser(user);
+    }
 }
