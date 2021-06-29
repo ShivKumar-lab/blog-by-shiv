@@ -1,6 +1,5 @@
 package com.shiv.blog.service;
 import com.shiv.blog.entity.User;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

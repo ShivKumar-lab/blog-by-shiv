@@ -3,9 +3,11 @@ package com.shiv.blog.controller;
 import com.shiv.blog.entity.Comment;
 import com.shiv.blog.entity.Post;
 import com.shiv.blog.entity.Tag;
+import com.shiv.blog.entity.User;
 import com.shiv.blog.service.CommentService;
 import com.shiv.blog.service.PostService;
 import com.shiv.blog.service.TagService;
+import com.shiv.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,8 @@ public class RestApiController {
     private CommentService commentService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/api/posts")
     public List<Post> getAllPosts() {
@@ -62,5 +66,15 @@ public class RestApiController {
     public String addComment(@PathVariable Long postId, @RequestBody Comment comment) {
         this.commentService.addComment(comment);
         return "Comment added";
+    }
+
+    @PostMapping("/api/users")
+    public List<User> getUsers() {
+        return this.userService.getAllUsers();
+    }
+
+    @PostMapping("api/user/{id}")
+    public User getUser(@PathVariable Long id) {
+        return this.userService.getUser(id);
     }
 }
