@@ -14,4 +14,6 @@ public interface TagService {
     List<Post> getSearchedPosts(String searchString);
 
     List<Tag> getAllTags();
+
+    Tag getTag(Long id);
 }

@@ -45,5 +45,9 @@ public class CommentServiceImpl implements CommentService {
         return this.commentRepository.getById(id);
     }
 
-
+    @Override
+    public void updateCommentById(Long id, Comment comment) {
+        comment.setId(id);
+        this.commentRepository.save(comment);
+    }
 }

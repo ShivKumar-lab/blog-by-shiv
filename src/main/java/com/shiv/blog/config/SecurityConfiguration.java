@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
     @Bean
     public UserDetailsService getUserDetailsService() {
         return new UserDetailsServiceImpl();
@@ -43,7 +42,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 antMatchers("/updatePost/**").hasAnyAuthority("USER", "ADMIN").
                 antMatchers("/deleteComment/**").hasAnyAuthority("USER", "ADMIN").
                 antMatchers("/updateComment/**").hasAnyAuthority("USER", "ADMIN").
-                antMatchers("/api/**").hasAnyAuthority("USER", "ADMIN").
                 antMatchers("/**").permitAll().and().formLogin().defaultSuccessUrl("/").loginPage("/login").and().csrf().disable();
     }
 }

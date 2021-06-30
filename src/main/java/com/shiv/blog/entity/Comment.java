@@ -18,6 +18,10 @@ public class Comment {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getUserId() {
         return userId;
     }

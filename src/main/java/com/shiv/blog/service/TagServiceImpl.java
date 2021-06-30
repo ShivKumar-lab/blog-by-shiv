@@ -5,7 +5,6 @@ import com.shiv.blog.entity.Tag;
 import com.shiv.blog.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +75,12 @@ public class TagServiceImpl implements TagService {
     public List<Tag> getAllTags() {
         return this.tagRepository.findAll();
     }
+
+    @Override
+    public Tag getTag(Long id) {
+        return this.tagRepository.getById(id);
+    }
+
     private Tag getTagByName(String name) {
         return this.tagRepository.findByName(name);
     }

@@ -18,4 +18,6 @@ public interface CommentService {
     Long getPostIdByCommentId(Long id);
 
     Comment getCommentById(Long id);
+
+    void updateCommentById(Long id, Comment comment);
 }
