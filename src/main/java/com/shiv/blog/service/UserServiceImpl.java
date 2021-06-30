@@ -1,5 +1,6 @@
 package com.shiv.blog.service;
 
+import com.shiv.blog.entity.Post;
 import com.shiv.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.shiv.blog.entity.User;
@@ -14,6 +15,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private PostService postService;
 
     @Override
     public void addUser(User user) {
@@ -35,5 +38,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return this.userRepository.findAll();
+    }
+
+    @Override
+    public void updateUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        this.userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        List<Post> posts = this.postService.getPostsOfAuthor(id);
+        for(Post post : posts) {
+            this.postService.deletePost(post.getId());
+        }
+        this.userRepository.deleteById(id);
     }
 }

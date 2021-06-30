@@ -139,4 +139,14 @@ public class RestApiController {
     public void addUser(@RequestBody User user) {
         this.userService.addUser(user);
     }
+
+    @PutMapping("api/user")
+    public void updateUser(@RequestBody User user) {
+        this.userService.updateUser(user);
+    }
+
+    @DeleteMapping("api/user/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        this.userService.deleteUser(id);
+    }
 }
